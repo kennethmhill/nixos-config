@@ -12,7 +12,7 @@
   environment.pathsToLink = [ "/share/zsh" ];
   programs.zsh.enable = true;
 
-  services.lorri.enable = true;
+  services.lorri.enable = false;
 
   networking.computerName = "ken's MacBook Pro";
   networking.hostName = "Mac";
