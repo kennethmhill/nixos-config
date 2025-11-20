@@ -1,6 +1,6 @@
 {
 
-  description = "<YOUR_NAME>'s NixOS configurations";
+  description = "Ken's NixOS configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
@@ -35,9 +35,9 @@
     in
     {
 
-      darwinConfigurations."<YOUR_NIX_NAME>" = mkSystem "macbook-pro-mx" {
+      darwinConfigurations."Mac" = mkSystem "macbook-pro-mx" {
         system = "aarch64-darwin";
-        user = "template";
+        user = "ken";
         darwin = true;
       };
 

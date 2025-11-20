@@ -91,8 +91,8 @@
     delta.enable = true;
     lfs.enable = true;
 
-    userName = "<YOUR_GIT_NAME>";
-    userEmail = "<YOUR_GIT_EMAIL>";
+    userName = "Kenneth Hill";
+    userEmail = "hillk7037@gmail.com";
 
     ignores = [
       ".DS_Store"

@@ -1,4 +1,4 @@
-export HOSTNAME := "<YOUR_NIX_NAME>"
+export HOSTNAME := "Mac"
 
 default: switch
 

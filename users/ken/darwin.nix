@@ -8,7 +8,7 @@
   nix = {
     settings.trusted-users = [
       "root"
-      "<YOUR_USERNAME>"
+      "ken"
       "@admin"
     ];
 
@@ -39,13 +39,13 @@
 
   services.lorri.enable = true;
 
-  networking.computerName = "<YOUR_COMPUTER_NAME>";
-  networking.hostName = "<YOUR_HOSTNAME>";
+  networking.computerName = "ken's MacBook Pro";
+  networking.hostName = "Mac";
 
-  system.primaryUser = "<YOUR_USERNAME>";
+  system.primaryUser = "ken";
 
-  users.users."<YOUR_USERNAME>" = {
-    home = "<YOUR_HOME_DIRECTORY>";
+  users.users."ken" = {
+    home = "/Users/ken";
     shell = pkgs.zsh;
   };
 }
