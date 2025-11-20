@@ -1,0 +1,41 @@
+# For all options, see:
+# https://ghostty.org/docs/config/reference
+
+font-family = "Berkeley Mono"
+font-feature = +calt
+font-size = "14"
+font-style = "Regular"
+
+# https://ghostty.org/docs/features/theme
+theme = dark:kanagawa-paper-ink,light:kanagawa-paper-canvas
+
+# https://ghostty.org/docs/features/shell-integration
+shell-integration-features = cursor,title,sudo
+
+# https://ghostty.org/docs/config/keybind/reference
+keybind = cmd+alt+j=goto_split:down
+keybind = cmd+alt+k=goto_split:up
+keybind = cmd+alt+h=goto_split:left
+keybind = cmd+alt+l=goto_split:right
+
+#-------------------------------------------------------# 
+#		Below this comment are opinionated choices I find		#
+# 			to be aesthetically pleasing on macOS.					#
+#-------------------------------------------------------# 
+
+background-blur = true background-opacity = 0.90
+cursor-style = bar
+
+# https://ghostty.org/docs/config/reference#macos-icon
+macos-icon = "blueprint"
+macos-titlebar-style = "transparent"
+
+mouse-hide-while-typing = true
+
+unfocused-split-opacity = 1.0
+working-directory = inherit
+
+window-inherit-font-size = true
+window-padding-balance = true
+window-padding-x = 8
+window-theme = system
