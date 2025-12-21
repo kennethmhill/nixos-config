@@ -1,5 +1,4 @@
 {
-  isWSL,
   inputs,
   ...
 }:
@@ -19,7 +18,7 @@
   ];
 
   home.sessionVariables = {
-		EDITOR = "code";
+    EDITOR = "nvim";
   };
 
   programs.home-manager = {
@@ -88,11 +87,12 @@
 
   programs.git = {
     enable = true;
-    delta.enable = true;
     lfs.enable = true;
 
-    userName = "Kenneth Hill";
-    userEmail = "hillk7037@gmail.com";
+		settings = {
+			user.name = "Kenneth Hill";
+			user.email = "hillk7037@gmail.com";
+		};
 
     ignores = [
       ".DS_Store"
@@ -101,9 +101,10 @@
     ];
   };
 
-  programs.zoxide = {
-    enable = true;
-  };
+	programs.delta.enable = true;
+	programs.delta.enableGitIntegration = true;
+
+  programs.zoxide.enable = true;
 
   programs.direnv = {
     enable = true;
@@ -174,7 +175,6 @@
     initContent = builtins.readFile ./init.zsh;
 
     shellAliases = {
-      j = "just";
       vi = "nvim";
       vim = "nvim";
     };
