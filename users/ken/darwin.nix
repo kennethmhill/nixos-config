@@ -6,13 +6,39 @@
   };
 
   nix = {
-    enable = false;
+    enable = true;
+     settings.trusted-users = [
+      "root"
+      "<YOUR_USERNAME>"
+      "@admin"
+    ];
+
+    linux-builder = {
+      enable = true;
+      ephemeral = true;
+      maxJobs = 4;
+      config = {
+        virtualisation = {
+          darwin-builder = {
+            diskSize = 40 * 1024;
+            memorySize = 8 * 1024;
+          };
+          cores = 6;
+        };
+      };  
+    };
+
+    distributedBuilds = true;
+
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
   };
 
   environment.pathsToLink = [ "/share/zsh" ];
   programs.zsh.enable = true;
 
-  services.lorri.enable = false;
+  services.lorri.enable = true;
 
   networking.computerName = "ken's MacBook Pro";
   networking.hostName = "Mac";
