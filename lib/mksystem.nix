@@ -1,59 +1,43 @@
-# This function creates a NixOS system based on our VM setup for a
-# particular architecture.
 {
-  nixpkgs,
   overlays,
   inputs,
 }:
-name:
+machine:
 {
   system,
   user,
   darwin ? false,
-  wsl ? false,
 }:
 let
+  mkSystem' = if darwin then inputs.nix-darwin.lib.darwinSystem else inputs.lib.nixosSystem;
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
 
-  isWSL = wsl;
-  # isLinux = !darwin && !isWSL;
-
-  machine = ../machines/${name}.nix;
-
-  user-config = ../users/${user}/${if darwin then "darwin" else "nixos"}.nix;
-
-  systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
-
-  home-manager =
+  machine-module = ../machines/${machine}.nix;
+  os-module = ../users/${user}/${if darwin then "darwin" else "nixos"}.nix;
+  nix-module = ../users/${user}/nix.nix;
+  home-manager-module =
     if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
-
 in
-systemFunc rec {
-  inherit system;
-
+mkSystem' {
   modules = [
-    { nixpkgs.overlays = overlays; }
-    { nixpkgs.config.allowUnfree = true; }
-
-    (if isWSL then inputs.nixos-wsl.nixosModules.wsl else { })
-
-    machine
-    user-config
-    home-manager.home-manager
     {
+      _module.args = { inherit pkgs-unstable; };
+    }
+    {
+      nixpkgs = {
+        inherit overlays;
+        hostPlatform.system = system;
+      };
+    }
+    machine-module
+		nix-module
+    os-module
+    home-manager-module.home-manager
+    {
+      home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${user} = (import ../users/${user}/home.nix) {
-        isWSL = isWSL;
-        inputs = inputs;
-      };
-    }
-
-    {
-      config._module.args = {
-        currentSystem = system;
-        currentSystemName = name;
-        currentSystemUser = user;
-        isWSL = isWSL;
         inputs = inputs;
       };
     }
